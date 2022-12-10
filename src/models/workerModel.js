@@ -25,7 +25,7 @@ const skillSchema = new Schema({
 const workerSchema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
-  based_in: { type: String, required: true },
+  location: { type: String, required: true },
   birth_date: { type: Date, required: true },
   experience: { type: [experienceSchema] },
   education: { type: [educationSchema] },

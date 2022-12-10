@@ -10,7 +10,7 @@ const opportunitySchema = new Schema({
 const companySchema = new Schema({
   name: { type: String, required: true },
   cnpj: { type: String, required: true },
-  based_in: { type: String, required: true },
+  location: { type: String, required: true },
   opportunities: { type: [opportunitySchema] },
 });
 
