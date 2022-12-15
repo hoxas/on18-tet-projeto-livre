@@ -1,64 +1,64 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const Worker = require("../models/workerModel");
+const Company = require("../models/companyModel");
 
 const uri = process.env["URI"];
 
 const get = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Worker.find(req.query);
+  const result = await Company.find(req.query);
   if (!result) {
-    return res.status(404).send("Trabalhador não encontrado");
+    return res.status(404).send("Empresa não encontrada");
   }
   res.status(200).send(result);
 };
 
 const getById = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Worker.findById(req.params.id);
+  const result = await Company.findById(req.params.id);
   if (!result) {
-    return res.status(404).send("Trabalhador não encontrado");
+    return res.status(404).send("Empresa não encontrada");
   }
   res.status(200).send(result);
 };
 
 const post = async (req, res) => {
   mongoose.connect(uri);
-  const newWorker = new Worker({
+  const newEmpresa = new Company({
     _id: new mongoose.Types.ObjectId(),
     ...req.body,
   });
 
-  newWorker.save((err) => {
+  newEmpresa.save((err) => {
     if (err) {
       res.status(400).send({ message: err.message });
     } else {
-      res.status(201).send(newWorker);
+      res.status(201).send(newEmpresa);
     }
   });
 };
 
 const deleteById = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Worker.findByIdAndDelete(req.params.id);
+  const result = await Company.findByIdAndDelete(req.params.id);
   if (!result) {
-    return res.status(404).send("Trabalhador não encontrado");
+    return res.status(404).send("Empresa não encontrada");
   }
   res.status(200).send({
-    message: `Worker ID: ${req.params.id} - Removido com Sucesso`,
+    message: `Empresa ID: ${req.params.id} - Removida com Sucesso`,
     deleted: result,
   });
 };
 
 const patchById = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Worker.findByIdAndUpdate(req.params.id, req.body, {
+  const result = await Company.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
   });
   if (!result) {
-    return res.status(404).send("Trabalhador não encontrado");
+    return res.status(404).send("Empresa não encontrada");
   }
-  const updatedResult = await Worker.findById(req.params.id);
+  const updatedResult = await Company.findById(req.params.id);
   res.status(200).send({
     message: `Worker ID: ${req.params.id} - Atualizado com Sucesso`,
     before: result,
