@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "engine": "16.x",
+  "engine": "14.x",
   "scripts": {
+    "start": "node server.js",
     "test": "test"
   },
   "author": "",
