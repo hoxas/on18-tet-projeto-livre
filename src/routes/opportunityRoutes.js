@@ -66,7 +66,7 @@ const tryCatchWrapper = require("../utils/tryCatchWrapper");
  *          schema:
  *            $ref: "#components/schemas/Opportunity"
  *    responses:
- *      200:
+ *      201:
  *        description: A vaga foi salva com sucesso
  *        content:
  *          application/json:
@@ -171,7 +171,7 @@ const tryCatchWrapper = require("../utils/tryCatchWrapper");
 routes.get("/", tryCatchWrapper(controller.get));
 routes.get("/:companyId", tryCatchWrapper(controller.getByCompanyId));
 routes.post("/:companyId", tryCatchWrapper(controller.postByCompanyId));
-routes.get("/:companyId/:id", tryCatchWrapper(controller.getById));
+routes.get("/:companyId/:id", tryCatchWrapper(controller.getByJobId));
 routes.delete("/:companyId/:id", tryCatchWrapper(controller.deleteById));
 routes.patch("/:companyId/:id", tryCatchWrapper(controller.patchById));
 

@@ -10,63 +10,16 @@ const get = async (req, res) => {
   if (!result) {
     return res.status(404).send("Vaga não encontrada");
   }
-  result.forEach((company) => {
-    if ("opportunities" in company) {
-      return company.opportunities;
-    }
-  });
-  res.status(200).send(result);
-};
-
-const getById = async (req, res) => {
-  mongoose.connect(uri);
-  let result = await Company.findById(req.params.companyId);
-  if (!result) {
-    return res.status(404).send("Empresa não encontrada");
-  }
-  if ("opportunities" in result) {
-    result = result.opportunities.filter(
-      (opportunity) => opportunity._id == req.params.id
-    );
-    if (!result) {
-      return res.status(404).send("Vaga não encontrada");
-    }
-    res.status(200).send(result);
-  }
-  res.status(404).send("A empresa não possui nenhuma vaga");
-};
-
-const deleteById = async (req, res) => {
-  mongoose.connect(uri);
-  const result = await Opportunity.findByIdAndDelete(req.params.id);
-  if (!result) {
-    return res.status(404).send("Vaga não encontrada");
-  }
-  res.status(200).send({
-    message: `Vaga ID: ${req.params.id} - Removida com Sucesso`,
-    deleted: result,
-  });
-};
-
-const patchById = async (req, res) => {
-  mongoose.connect(uri);
-  const result = await Opportunity.findByIdAndUpdate(req.params.id, req.body, {
-    runValidators: true,
-  });
-  if (!result) {
-    return res.status(404).send("Vaga não encontrada");
-  }
-  const updatedResult = await Opportunity.findById(req.params.id);
-  res.status(200).send({
-    message: `Vaga ID: ${req.params.id} - Atualizada com Sucesso`,
-    before: result,
-    after: updatedResult,
-  });
+  result = result.filter((company) => "opportunities" in company);
+  result.forEach((company, index) => (result[index] = company.opportunities));
+  console.log(result.flat());
+  opportunities = result.flat();
+  res.status(200).send(opportunities);
 };
 
 const getByCompanyId = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Company.findById(req.params.id);
+  const result = await Company.findById(req.params.companyId);
   if (!result) {
     return res.status(404).send("Empresa não encontrada");
   }
@@ -75,28 +28,91 @@ const getByCompanyId = async (req, res) => {
 
 const postByCompanyId = async (req, res) => {
   mongoose.connect(uri);
-  const result = await Company.findById(req.params.id);
+  const result = await Company.findById(req.params.companyId);
   if (!result) {
     return res.status(404).send("Empresa não encontrada");
   }
-
-  const newOpportunity = new Opportunity({
-    _id: new mongoose.Types.ObjectId(),
-    ...req.body,
-  });
-
-  newOpportunity.save((err) => {
+  const opportunityLength = result.opportunities.push(req.body);
+  result.save((err) => {
     if (err) {
       res.status(400).send({ message: err.message });
     } else {
-      res.status(201).send(newEmpresa);
+      res.status(201).send(result.opportunities[opportunityLength - 1]);
+    }
+  });
+};
+
+const getByJobId = async (req, res) => {
+  mongoose.connect(uri);
+  const result = await Company.findById(req.params.companyId);
+  if (!result) {
+    return res.status(404).send("Empresa não encontrada");
+  }
+  const job = result.opportunities.find(
+    (opportunity) => opportunity._id == req.params.id
+  );
+  if (!job) {
+    return res.status(404).send("Vaga não encontrada");
+  }
+  res.status(200).send(job);
+};
+
+const deleteById = async (req, res) => {
+  mongoose.connect(uri);
+  const result = await Company.findById(req.params.companyId);
+  if (!result) {
+    return res.status(404).send("Empresa não encontrada");
+  }
+  const job = result.opportunities.find(
+    (opportunity) => opportunity._id == req.params.id
+  );
+  if (!job) {
+    return res.status(404).send("Vaga não encontrada");
+  }
+  result.opportunities.pull({ _id: req.params.id });
+  result.save((err) => {
+    if (err) {
+      res.status(400).send({ message: err.message });
+    } else {
+      res.status(200).send({
+        message: `Vaga ID: ${req.params.id} - Removida com Sucesso`,
+        deleted: job,
+      });
+    }
+  });
+};
+
+const patchById = async (req, res) => {
+  mongoose.connect(uri);
+  const result = await Company.findById(req.params.companyId);
+  if (!result) {
+    return res.status(404).send("Empresa não encontrada");
+  }
+  const jobIndex = result.opportunities.findIndex(
+    (opportunity) => opportunity._id == req.params.id
+  );
+  if (!jobIndex) {
+    return res.status(404).send("Vaga não encontrada");
+  }
+  const job = JSON.parse(JSON.stringify(result.opportunities[jobIndex]));
+  result.opportunities[jobIndex].set(req.body);
+  const updatedResult = result.opportunities[jobIndex];
+  result.save((err) => {
+    if (err) {
+      res.status(400).send({ message: err.message });
+    } else {
+      res.status(200).send({
+        message: `Vaga ID: ${req.params.id} - Atualizada com Sucesso`,
+        before: job,
+        after: updatedResult,
+      });
     }
   });
 };
 
 module.exports = {
   get,
-  getById,
+  getByJobId,
   deleteById,
   patchById,
   getByCompanyId,
