@@ -7,8 +7,6 @@ const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-app.use(express.static("public"));
-
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -30,7 +28,8 @@ const options = {
 };
 
 const options2 = {
-  customCssUrl: "/public/swagger-ui.css",
+  customCssUrl:
+    "https://github.com/hoxas/on18-tet-projeto-livre/blob/master/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
