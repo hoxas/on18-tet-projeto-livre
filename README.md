@@ -136,4 +136,5 @@ dotenv
 mongoose
 swagger-jsdoc
 swagger-ui-express
+vercel (para deploy)
 ```
