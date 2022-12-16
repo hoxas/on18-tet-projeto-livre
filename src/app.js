@@ -29,7 +29,7 @@ const options = {
 
 const options2 = {
   customCssUrl:
-    "https://github.com/hoxas/on18-tet-projeto-livre/blob/master/public/swagger-ui.css",
+    "https://raw.githubusercontent.com/hoxas/on18-tet-projeto-livre/master/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
