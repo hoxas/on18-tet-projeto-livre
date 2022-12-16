@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("node:path");
 const workerRoutes = require("./routes/workerRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const opportunityRoutes = require("./routes/opportunityRoutes");
 const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+
+app.use(express.static(path.join(__dirname, "static")));
 
 const options = {
   definition: {
@@ -29,7 +32,12 @@ const options = {
 
 const specs = swaggerJsDoc(options);
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.use(
+  "/api-docs",
+  express.static("api-docs/", { index: false }),
+  swaggerUI.serve,
+  swaggerUI.setup(specs)
+);
 
 app.use(express.json());
 app.use(cors());
