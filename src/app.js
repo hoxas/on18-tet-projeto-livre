@@ -32,9 +32,6 @@ const options = {
 const specs = swaggerJsDoc(options);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
-app.get("/api-docs/swagger-ui.css", (req, res) =>
-  res.status(200).send("public/api-docs/swagger-ui.css")
-);
 
 app.use(express.json());
 app.use(cors());
