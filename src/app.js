@@ -22,10 +22,10 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "https://on18-tet-projeto-livre.vercel.app",
       },
       {
-        url: "https://on18-tet-projeto-livre.vercel.app",
+        url: "http://localhost:5000",
       },
     ],
   },
