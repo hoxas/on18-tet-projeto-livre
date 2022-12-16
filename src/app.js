@@ -7,7 +7,7 @@ const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-app.use(express.static("./public"));
+app.use(express.static("public"));
 
 const options = {
   definition: {
@@ -33,7 +33,7 @@ const specs = swaggerJsDoc(options);
 
 app.use(
   "/api-docs",
-  express.static("node_modules/swagger_ui_dist/"),
+  express.static("node_modules/swagger_ui_dist/", { index: false }),
   swaggerUI.serve,
   swaggerUI.setup(specs)
 );
