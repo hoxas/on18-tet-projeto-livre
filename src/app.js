@@ -7,7 +7,7 @@ const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-app.use("/public", express.static("public"));
+app.use(express.static("public"));
 
 const options = {
   definition: {
@@ -27,13 +27,14 @@ const options = {
     ],
   },
   apis: ["./src/routes/*.js"],
-  customCssUrl:
-    "https://github.com/hoxas/on18-tet-projeto-livre/blob/master/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.get("/api-docs/swagger-ui.css", (req, res) =>
+  res.status(200).send("public/api-docs/swagger-ui.css")
+);
 
 app.use(express.json());
 app.use(cors());
