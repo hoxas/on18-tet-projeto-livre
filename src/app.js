@@ -19,6 +19,9 @@ const options = {
       {
         url: "http://localhost:5000",
       },
+      {
+        url: "https://on18-tet-projeto-livre.vercel.app",
+      },
     ],
   },
   apis: ["./src/routes/*.js"],
