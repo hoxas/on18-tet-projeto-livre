@@ -80,28 +80,40 @@ npm install
 
 Defina a URI da mongoDB no arquivo .env na raiz do repositório
 
+Criar arquivo .env:
+
+#### No Windows:
+
 ```
-Criar arquivo:
-  No Windows:
-  type nul > .env
+type nul > .env
+```
 
-  No Linux:
-  touch .env
+#### No Linux ou MacOS:
 
-Dentro do .env coloque:
+```
+touch .env
+```
+
+Dentro do .env coloque a URI para acesso a sua mongoDB:
+
+```
 URI=uri_do_seu_mongodb
 ```
 
 Rodar servidor
 
 ```
+
 npm run start
-```
-
-Acesse o servidor no port padrão pela URI e ela te redirecionará para a documentação do Swagger
 
 ```
+
+Acesse o servidor no port padrão (5000, definido no arquivo config.json) pela URI e ela te redirecionará para a documentação do Swagger
+
+```
+
 localhost:5000/
+
 ```
 
 ## Uso <a name = "usage"></a>
@@ -128,6 +140,7 @@ As rotas são:
 Tecnologias usadas no projeto:
 
 ```
+
 node
 npm
 express
@@ -137,4 +150,5 @@ mongoose
 swagger-jsdoc
 swagger-ui-express
 vercel (para deploy)
+
 ```
