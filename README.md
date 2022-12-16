@@ -5,12 +5,12 @@
 - [Sobre](#about)
 - [Estrutura do Projeto](#file_structure)
 - [Começando](#getting_started)
-- [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+- [Uso](#usage)
+- [Tecnologias](#technologies)
 
 ## Sobre <a name = "about"></a>
 
-API para conectar trabalhadoras com vagas em empresas.
+API para conectar trabalhadoras com vagas de empresas.
 
 ## Estrutura do Projeto <a name = "file_structure"></a>
 
@@ -106,4 +106,30 @@ localhost:5000/
 
 ## Uso <a name = "usage"></a>
 
-Add notes about how to use the system.
+As rotas disponíveis podem ser acessadas com mais detalhes na documentação no link: https://on18-tet-projeto-livre.vercel.app/
+
+As rotas são:
+| Rota | Função | Métodos Aceitos |
+|----------------------------|----------------------------------------------------|--------------------|
+| /companies | Retorna todas as empresas ou posta empresa nova | GET, POST |
+| /companies/{empresaId} | Retorna empresa por ID, deleta ou atualiza | GET, DELETE, PATCH |
+| /jobs | Retorna a lista de todas as vagas disponíveis | GET |
+| /jobs/{empresaId} | Retorna as vagas da empresa ou posta uma vaga nova | GET, POST |
+| /jobs/{empresaId}/{vagaId} | Retorna a vaga por ID, deleta ou atualiza | GET, DELETE, PATCH |
+| /workers | Retorna todos os trabalhadores ou posta um novo | GET, POST |
+| /workers/{trabalhadorId} | Retorna um trabalhador por ID, deleta ou atualiza | GET, DELETE, PATCH |
+
+## Tecnologias <a name = "technologies"></a>
+
+Tecnologias usadas no projeto:
+
+```
+node
+npm
+express
+cors
+dotenv
+mongoose
+swagger-jsdoc
+swagger-ui-express
+```
