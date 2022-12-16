@@ -7,7 +7,7 @@ const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-app.use("/public", express.static("public"));
+app.use(express.static("public"));
 
 const options = {
   definition: {
@@ -30,7 +30,7 @@ const options = {
 };
 
 const options2 = {
-  customCssUrl: "/public/api-docs/swagger-ui.css",
+  customCssUrl: "/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
