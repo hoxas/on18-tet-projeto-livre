@@ -31,12 +31,7 @@ const options = {
 
 const specs = swaggerJsDoc(options);
 
-app.use(
-  "/api-docs",
-  express.static("node_modules/swagger_ui_dist/", { index: false }),
-  swaggerUI.serve,
-  swaggerUI.setup(specs)
-);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use(express.json());
 app.use(cors());
