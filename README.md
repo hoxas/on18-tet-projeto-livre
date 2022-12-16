@@ -3,18 +3,14 @@
 ## Table of Contents
 
 - [Sobre](#about)
-- [Começando](#getting_started)
 - [Estrutura do Projeto](#file_structure)
+- [Começando](#getting_started)
 - [Usage](#usage)
 - [Contributing](../CONTRIBUTING.md)
 
 ## Sobre <a name = "about"></a>
 
 API para conectar trabalhadoras com vagas em empresas.
-
-## Começando <a name = "getting_started"></a>
-
-Essas são as instruções para rodar uma cópia do projeto localmente
 
 ## Estrutura do Projeto <a name = "file_structure"></a>
 
@@ -47,6 +43,10 @@ Projeto feito usando a arquitetura MVC
 ├── README.md
 └── vercel.json
 ```
+
+## Começando <a name = "getting_started"></a>
+
+Essas são as instruções para rodar uma cópia do projeto localmente
 
 ### Pré-requisitos
 
