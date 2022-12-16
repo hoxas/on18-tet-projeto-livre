@@ -38,14 +38,10 @@ const options2 = {
 
 const specs = swaggerJsDoc(options);
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs, options2));
+app.use("/", swaggerUI.serve, swaggerUI.setup(specs, options2));
 
 app.use(express.json());
 app.use(cors());
-
-app.get("/", (req, res) => {
-  res.status(200).send("API ON");
-});
 
 app.use("/workers", workerRoutes);
 app.use("/companies", companyRoutes);
