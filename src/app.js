@@ -27,7 +27,8 @@ const options = {
     ],
   },
   apis: ["./src/routes/*.js"],
-  customCssUrl: "/public/swagger-ui.css",
+  customCssUrl:
+    "https://github.com/hoxas/on18-tet-projeto-livre/blob/master/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
