@@ -1,11 +1,16 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("node:path");
 const workerRoutes = require("./routes/workerRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const opportunityRoutes = require("./routes/opportunityRoutes");
 const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+
+app.get("/public/swagger-ui.css", function (req, res) {
+  res.sendFile("swagger-ui.css", { root: path.join(__dirname, "public") });
+});
 
 const options = {
   definition: {
@@ -28,8 +33,7 @@ const options = {
 };
 
 const options2 = {
-  customCssUrl:
-    "https://raw.githubusercontent.com/hoxas/on18-tet-projeto-livre/master/public/swagger-ui.css",
+  customCssUrl: "/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
