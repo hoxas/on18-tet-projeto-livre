@@ -106,7 +106,11 @@ localhost:5000/
 
 ## Uso <a name = "usage"></a>
 
-As rotas disponíveis podem ser acessadas com mais detalhes na documentação no link: https://on18-tet-projeto-livre.vercel.app/
+As rotas disponíveis podem ser acessadas com mais detalhes na documentação no link:
+
+### https://on18-tet-projeto-livre.vercel.app/
+
+---
 
 As rotas são:
 | Rota | Função | Métodos Aceitos |
