@@ -7,7 +7,7 @@ const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
-app.use(express.static("public"));
+app.use("/public", express.static("public"));
 
 const options = {
   definition: {
@@ -27,6 +27,7 @@ const options = {
     ],
   },
   apis: ["./src/routes/*.js"],
+  customCssUrl: "/public/swagger-ui.css",
 };
 
 const specs = swaggerJsDoc(options);
